@@ -1,0 +1,4 @@
+tabel role[id,role['admin','user']]
+tabel user [id,foto_profile,username,email,nama,alamat,password,role_id]
+tabel laporan [id,,user_id,tgl_laporan,foto,latitude,longtitude,alamat,keterangan,kerusakan,status_laporan]
+tabel poin [id, user_id, poin]
