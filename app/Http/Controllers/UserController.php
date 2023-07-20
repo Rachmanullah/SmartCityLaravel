@@ -43,7 +43,10 @@ class UserController extends Controller
             ]);
             $data->save();
             if ($request->Is('api/*')) {
-                return response()->json($data);
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
             } else {
                 return redirect()->route('user.index')->with('message', 'Data Berhasil Disimpan');
             }
