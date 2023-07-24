@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +19,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(UserController::class)->group(function () {
     route::post('/register', 'store');
+    route::post('/update/{id}', 'update')->middleware('auth:sanctum');
 });
 
 route::controller(AuthController::class)->group(function () {
     route::post('/login', 'login');
     route::post('/logout', 'logout');
     route::post('/data', 'data')->middleware('auth:sanctum');
+});
+
+route::controller(LaporanController::class)->group(function () {
+    route::get('laporan', 'index')->name('laporan.index');
+    route::post('laporan/store', 'store')->name('laporan.store')->middleware('auth:sanctum');
 });

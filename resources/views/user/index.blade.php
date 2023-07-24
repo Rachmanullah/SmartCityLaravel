@@ -187,44 +187,59 @@
                             <div class="px-6 py-6 lg:px-8">
                                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Update Data Role</h3>
                                 <form class="space-y-6" action="{{ route('user.update',['id'=>$users->id]) }}"
-                                    method="POST">
+                                    method="POST" enctype="multipart/form-data">
                                     @csrf
-                                    @method("PUT")
+                                    {{-- @method("PUT") --}}
+                                    <div>
+                                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                            for="file_input">Upload file</label>
+                                        <input
+                                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                            aria-describedby="file_input_help" name="file_foto" type="file">
+                                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+                                            PNG, JPG.</p>
+                                    </div>
                                     <div>
                                         <label for="nama"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama</label>
-                                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama" value="{{ $users->nama }}"
+                                        <input type="text" name="nama" id="nama" placeholder="Masukkan Nama"
+                                            value="{{ $users->nama }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                             required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="Username"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                                        <input type="text" name="username" id="username" placeholder="Masukkan Username" value="{{ $users->username }}"
+                                        <input type="text" name="username" id="username" placeholder="Masukkan Username"
+                                            value="{{ $users->username }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                             required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="email"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                        <input type="email" name="email" id="email" placeholder="Email@gmail.com" value="{{ $users->email }}"
+                                        <input type="email" name="email" id="email" placeholder="Email@gmail.com"
+                                            value="{{ $users->email }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                             required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="alamat"
                                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat" value="{{ $users->alamat }}"
+                                        <input type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat"
+                                            value="{{ $users->alamat }}"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                             required autocomplete="off">
                                     </div>
                                     <div>
                                         <label for="role"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
+                                            an
                                             Role</label>
                                         <select name="role"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option selected value="{{ $users->role_id }}">{{ $users->roles->role }}</option>
+                                            <option selected value="{{ $users->role_id }}">{{ $users->roles->role }}
+                                            </option>
                                             <option disabled>Choose a Role</option>
                                             @foreach ($role as $roles)
                                             <option value="{{ $roles->id }}">{{ $roles->role }}</option>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,13 @@ Route::controller(RoleController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     route::get('user', 'index')->name('user.index');
     route::post('user/store', 'store')->name('user.store');
-    route::put('user/update/{id}', 'update')->name('user.update');
+    route::post('user/update/{id}', 'update')->name('user.update');
     route::get('user/delete/{id}', 'delete')->name('user.delete');
+});
+
+//laporan
+route::controller(LaporanController::class)->group(function(){
+    route::get('laporan','index')->name('laporan.index');
+    route::post('laporan/store' , 'store')->name('laporan.store');
+    route::get('laporan/delete/{id}', 'destroy')->name('laporan.delete');
 });

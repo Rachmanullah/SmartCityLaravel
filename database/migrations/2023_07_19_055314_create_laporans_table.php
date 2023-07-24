@@ -19,11 +19,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('foto')->nullable();
             $table->string('latitude')->nullable();
-            $table->string('longtitude')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('lokasi')->nullable();
             $table->string('keterangan')->nullable();
-            $table->enum('kerusakan', ['ringan', 'sedang', 'parah'])->nullable();
-            $table->enum('status', ['Diajukan', 'Ditolak', 'DiTanggapi'])->nullable();
+            $table->enum('kerusakan', ['Ringan', 'Sedang', 'Parah'])->nullable();
+            $table->enum('status', ['Diajukan', 'Diterima', 'Ditolak', 'Dalam Penanganan', 'Selesai'])->nullable();
             $table->timestamps();
         });
     }

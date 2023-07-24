@@ -30,7 +30,7 @@ class UserController extends Controller
                 $file_foto = time() . '-' . $request->file('file_foto')->getClientOriginalName();
                 $request->file('file_foto')->move('assets/storange/image_user', $file_foto);
             } else {
-                $file_foto = '';
+                $file_foto = 'user.jpeg';
             }
             $data = new User([
                 'nama' => $request->nama,
@@ -58,16 +58,36 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            User::find($id)->update([
+            $data = User::find($id);
+
+            if ($request->hasFile('file_foto') || $request->foto) {
+                File::delete('assets/storange/image_user/' . $data->foto);
+                $gambar = $request->foto ? $request->foto : $request->file('file_foto');
+                $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
+                $tujuan_upload = 'assets/storange/image_user';
+                $gambar->move($tujuan_upload, $nama_gambar);
+            }else{
+                $nama_gambar = $data->foto ? $data->foto : '';
+            }
+            $data->update([
                 'nama' => $request->nama,
                 'username' => $request->username,
                 'email' => $request->email,
                 'alamat' => $request->alamat,
-                'role_id' => $request->role,
+                'role_id' => $request->Is('api/*') ? 2 : $request->role,
+                'foto' => $nama_gambar,
             ]);
-            return redirect()->route('user.index')->with('message', 'Data Berhasil DiUpdate');
+            if ($request->Is('api/*')) {
+                return response()->json([
+                    'success' => true,
+                    'data' => $data
+                ], 200);
+            } else {
+                return redirect()->route('user.index')->with('message', 'Data Berhasil DiUpdate');
+            }
         } catch (\Throwable $th) {
-            return redirect()->route('user.index')->with('error', $th);
+            dd($th);
+            // return redirect()->route('user.index')->with('error', $th);
         }
     }
 

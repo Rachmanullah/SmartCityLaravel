@@ -25,7 +25,6 @@ class User extends Authenticatable
         'alamat',
         'foto',
         'role_id',
-        
     ];
 
     /**
@@ -50,5 +49,9 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsTo(role::class, 'role_id');
+    }
+    public function laporans()
+    {
+        return $this->hasMany(laporan::class);
     }
 }

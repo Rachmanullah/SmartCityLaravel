@@ -12,10 +12,14 @@ class laporan extends Model
         'user_id',
         'foto',
         'latitude',
-        'longtitude',
-        'alamat',
+        'longitude',
+        'lokasi',
         'keterangan',
         'kerusakan',
         'status',
     ];
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

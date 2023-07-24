@@ -18,13 +18,13 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        $user = User::where('email', $request->email)->first();
-
+        $user = User::where('email', $request->email)->with('roles')->first();
         if ($user && Hash('sha512', $request->password) == $user->password) {
             $token = $user->createToken('ApiToken')->plainTextToken;
             return response()->json(
                 [
-                    'user' => $user,
+                    'success' => true,
+                    'data' => $user,
                     'token' => $token
                 ],
                 200
@@ -51,11 +51,12 @@ class AuthController extends Controller
                 // $token->save();
                 $token->delete();
             }
-            return response()->json(['user' => $user, 'message' => 'Token valid'], 200);
+            return response()->json(['data' => $user, 'message' => 'Token valid'], 200);
         } else {
             return response()->json(['message' => 'Token tidak valid'], 401);
         }
     }
+
     public function data(){
         $user = Auth::guard('sanctum')->user();
         return response()->json(['data'=> $user],200);
