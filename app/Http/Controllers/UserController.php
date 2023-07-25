@@ -27,10 +27,8 @@ class UserController extends Controller
         ]);
         try {
             if ($request->file('file_foto')) {
-                $file_foto = time() . '-' . $request->file('file_foto')->getClientOriginalName();
+                $file_foto = time() . '-' . $request->file('file_foto') ?  $request->file('file_foto')->getClientOriginalName() : 'user.png';
                 $request->file('file_foto')->move('assets/storange/image_user', $file_foto);
-            } else {
-                $file_foto = 'user.png';
             }
             $data = new User([
                 'nama' => $request->nama,
@@ -66,7 +64,7 @@ class UserController extends Controller
                 $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
                 $tujuan_upload = 'assets/storange/image_user';
                 $gambar->move($tujuan_upload, $nama_gambar);
-            }else{
+            } else {
                 $nama_gambar = $data->foto ? $data->foto : '';
             }
             $data->update([

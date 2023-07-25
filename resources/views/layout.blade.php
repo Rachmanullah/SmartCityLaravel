@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite(['resources/css/app.css'])
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="icon" href="http://127.0.0.1:8000/assets/storange/image/Kontraktor.png" type="image/png">
     <link rel="stylesheet" href="http://127.0.0.1:8000/assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="http://127.0.0.1:8000/assets/fontawesome/css/fontawesome.css">
     <link rel="stylesheet" href="http://127.0.0.1:8000/assets/fontawesome/css/all.min.css">
@@ -29,9 +30,9 @@
                         </svg>
                     </button>
                     <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
+                        <img src="http://127.0.0.1:8000/assets/storange/image/Kontraktor.png" class="h-12 mr-3" alt="FlowBite Logo" />
                         <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">SPJR</span>
                     </a>
                 </div>
                 <div class="flex items-center">
@@ -42,7 +43,7 @@
                                 aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                 <span class="sr-only">Open user menu</span>
                                 <img class="w-8 h-8 rounded-full"
-                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+                                    src="http://127.0.0.1:8000/assets/storange/image_user/{{ auth()->user()->foto }}"
                                     alt="user photo">
                             </button>
                         </div>
@@ -50,10 +51,10 @@
                             id="dropdown-user">
                             <div class="px-4 py-3" role="none">
                                 <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                    Neil Sims
+                                    {{ auth()->user()->nama }}
                                 </p>
                                 <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                    neil.sims@flowbite.com
+                                    {{ auth()->user()->email }}
                                 </p>
                             </div>
                             <ul class="py-1" role="none">
@@ -63,7 +64,7 @@
                                         role="menuitem">Settings</a>
                                 </li>
                                 <li>
-                                    <a href="#"
+                                    <a href="{{ route('logout') }}"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                         role="menuitem">Sign out</a>
                                 </li>
