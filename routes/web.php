@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -16,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+route::controller(adminController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
+});
 
 //role
 Route::controller(RoleController::class)->group(function () {
@@ -37,8 +38,10 @@ Route::controller(UserController::class)->group(function () {
 });
 
 //laporan
-route::controller(LaporanController::class)->group(function(){
-    route::get('laporan','index')->name('laporan.index');
-    route::post('laporan/store' , 'store')->name('laporan.store');
+route::controller(LaporanController::class)->group(function () {
+    route::get('laporan', 'index')->name('laporan.index');
+    route::post('laporan/store', 'store')->name('laporan.store');
     route::get('laporan/delete/{id}', 'destroy')->name('laporan.delete');
+    route::put('laporan/update/{id}', 'update')->name('laporan.update');
+    route::get('laporan/print', 'print')->name('laporan.print');
 });

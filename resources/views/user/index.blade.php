@@ -142,7 +142,7 @@
                 </td>
                 <td class="px-6 py-4">
                     <img class="w-32 h-32"
-                        src="http://127.0.0.1:8000/assets/storange/image_user/{{ $users->foto ? $users->foto : 'user.jpeg' }}"
+                        src="http://127.0.0.1:8000/assets/storange/image_user/{{ $users->foto }}"
                         alt="foto" />
                 </td>
                 <td class="px-6 py-4">

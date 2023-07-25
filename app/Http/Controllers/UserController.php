@@ -30,7 +30,7 @@ class UserController extends Controller
                 $file_foto = time() . '-' . $request->file('file_foto')->getClientOriginalName();
                 $request->file('file_foto')->move('assets/storange/image_user', $file_foto);
             } else {
-                $file_foto = 'user.jpeg';
+                $file_foto = 'user.png';
             }
             $data = new User([
                 'nama' => $request->nama,

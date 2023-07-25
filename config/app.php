@@ -122,7 +122,6 @@ return [
     */
 
     'key' => env('APP_KEY'),
-
     'cipher' => 'AES-256-CBC',
 
     /*
@@ -181,7 +180,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        //Provider Maps
+        GoogleMaps\ServiceProvider\GoogleMapsServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -210,6 +210,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        //maps
+        'GoogleMaps' => GoogleMaps\Facade\GoogleMapsFacade::class,
     ])->toArray(),
 
 ];
