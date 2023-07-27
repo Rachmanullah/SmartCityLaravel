@@ -25,8 +25,8 @@ class LaporanController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->hasFile('file_foto') || $request->foto) {
-            $gambar = $request->foto ? $request->foto : $request->file('file_foto');
+        if ($request->hasFile('file_foto')) {
+            $gambar = $request->file('file_foto');
             $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
             $tujuan_upload = 'assets/storange/image_laporan';
             $gambar->move($tujuan_upload, $nama_gambar);
@@ -53,6 +53,15 @@ class LaporanController extends Controller
         } else {
             return redirect()->route('laporan.index')->with('message', 'Data Berhasil DiSimpan');
         }
+    }
+
+    public function getPerId($id)
+    {
+        $data = laporan::where('user_id', $id)->get();
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+        ], 200);
     }
 
     public function update(Request $request, $id)

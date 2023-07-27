@@ -27,8 +27,11 @@ class UserController extends Controller
         ]);
         try {
             if ($request->file('file_foto')) {
-                $file_foto = time() . '-' . $request->file('file_foto') ?  $request->file('file_foto')->getClientOriginalName() : 'user.png';
-                $request->file('file_foto')->move('assets/storange/image_user', $file_foto);
+                $nama_gambar = time() . '-' . $request->file('file_foto')->getClientOriginalName();
+                $tujuan_upload = 'assets/storange/image_user';
+                $request->file('file_foto')->move($tujuan_upload, $nama_gambar);
+            } else {
+                $nama_gambar = 'user.png';
             }
             $data = new User([
                 'nama' => $request->nama,
@@ -37,7 +40,7 @@ class UserController extends Controller
                 'password' => hash('sha512', $request->password),
                 'alamat' => $request->alamat,
                 'role_id' => $request->role ? $request->role : 2,
-                'foto' => $file_foto,
+                'foto' => $nama_gambar,
             ]);
             $data->save();
             if ($request->Is('api/*')) {
@@ -58,14 +61,16 @@ class UserController extends Controller
         try {
             $data = User::find($id);
 
-            if ($request->hasFile('file_foto') || $request->foto) {
-                File::delete('assets/storange/image_user/' . $data->foto);
-                $gambar = $request->foto ? $request->foto : $request->file('file_foto');
+            if ($request->hasFile('file_foto')) {
+                if ($data->foto != "user.png") {
+                    File::delete('assets/storange/image_user/' . $data->foto);
+                }
+                $gambar = $request->file('file_foto');
                 $nama_gambar = time() . '_' . $gambar->getClientOriginalName();
                 $tujuan_upload = 'assets/storange/image_user';
                 $gambar->move($tujuan_upload, $nama_gambar);
             } else {
-                $nama_gambar = $data->foto ? $data->foto : '';
+                $nama_gambar = $data->foto;
             }
             $data->update([
                 'nama' => $request->nama,

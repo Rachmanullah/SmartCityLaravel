@@ -30,5 +30,6 @@ route::controller(AuthController::class)->group(function () {
 
 route::controller(LaporanController::class)->group(function () {
     route::get('laporan', 'index')->name('laporan.index');
+    route::get('laporan/{id}', 'getPerId')->name('laporan.getPerId');
     route::post('laporan/store', 'store')->name('laporan.store')->middleware('auth:sanctum');
 });
